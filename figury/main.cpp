@@ -32,30 +32,37 @@ void printTwoFigure(string namefigure1, figure &figure1, string namefigure2, fig
 
 int main(int argc, char *argv[]) {
 	
-	circle *kol=new circle(4,"biale");
-	circle *kol2=new circle();
+	circle *kol = new circle(4,"biale");
+	circle *kol2 = new circle();
 	rectangle pro(6,3,"Niebieski");
 	float test=123;
 	
 	cout<<"1. Wykorzysytywane zmienne: "<<endl;
 	cout<<endl;
+	
 	cout<<"Obiekt typu kolo:"<<endl;
 	kol->print();
 	cout<<endl;
+	
 	cout<<"Drugi obiekt typu kolo, o wartosci domyslnej:"<<endl;
 	kol2[0].print();
 	cout<<endl;
+	
 	cout<<"Obiekt typu prostokat:"<<endl;
 	pro.print();
 	cout<<endl;
+	
 	cout<<"Zmienna typu int:"<<test<<endl;
 	cout<<endl;
 	
+	
 	cout<<"2. Odwolywanie sie do metody przez wskaznik, dzialanie metody set:"<<endl;
 	cout<<endl;
+	
 	cout<<"Przed zmiana: "<<endl;
 	printUniversal(*kol);
 	kol->setR(123);
+	
 	cout<<"Po wpisaniu do r wartosci: "<<test<<endl;
 	printUniversal(*kol);
 	
@@ -85,12 +92,14 @@ int main(int argc, char *argv[]) {
 	
 	cout<<"Wyswietlamy tablice trojwymiarowa z obiektami kolo i prostokat, korzystajac z metody printUniversal:"<<endl;
 	cout<<endl;
-	for(int i=0;i<2;i++){
-		for(int j=0;j<2;j++)
-			for(int k=0;k<2;k++){
+	for(int i=0;i<2;i++) {
+		for(int j=0;j<2;j++) {
+			for(int k=0;k<2;k++) { 
+			
 				cout<<"ksz["<<i<<"]["<<j<<"]["<<k<<"]:";
 				printUniversal(*figures[i][j][k]);
-			}		
+			}
+		}
 	}
 	
 	cout<<"end"<<endl;
@@ -100,6 +109,7 @@ int main(int argc, char *argv[]) {
 	cout<<"4. Demonstracja polimorfizmu na przykladzie metody printTwoFigure rozne typy:"<<endl;
 	cout<<endl;
 	printTwoFigure("", *kol, "", pro);
+	
 	cout<<"Te same typy:"<<endl;
 	cout<<endl;
 	printTwoFigure("", *(new rectangle()), "", pro);
@@ -109,7 +119,6 @@ int main(int argc, char *argv[]) {
 	cout<<endl;
 	rectangle kopiaPro = copyUniversal(pro);
 	printTwoFigure("oryginal", pro, "kopia", kopiaPro);
-	
 	
 	cout<<"Po zmianie oryginalu: "<<endl;
 	cout<<endl;
