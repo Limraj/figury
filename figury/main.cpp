@@ -3,6 +3,11 @@
 #include "source\rectangle.hpp"
 #include "source\figure.hpp"
 
+circle *circle1 = new circle(4,"biale");
+circle *circleDefault = new circle();
+rectangle rectangle1(6,3,"Niebieski");
+float value = 33;
+
 void setColorAndPrintUniversal(figure &figure, string color) {
 	figure.setColor(color);
 	figure.print();
@@ -30,44 +35,43 @@ void printTwoFigure(string namefigure1, figure &figure1, string namefigure2, fig
 
 }
 
-int main(int argc, char *argv[]) {
-	
-	circle *kol = new circle(4,"biale");
-	circle *kol2 = new circle();
-	rectangle pro(6,3,"Niebieski");
-	float test=123;
-	
-	cout<<"1. Wykorzysytywane zmienne: "<<endl;
+void usedVariablesPrint() {
+
+	cout<<"Wykorzysytywane zmienne: "<<endl;
 	cout<<endl;
 	
 	cout<<"Obiekt typu kolo:"<<endl;
-	kol->print();
+	circle1->print();
 	cout<<endl;
 	
 	cout<<"Drugi obiekt typu kolo, o wartosci domyslnej:"<<endl;
-	kol2[0].print();
+	circleDefault[0].print();
 	cout<<endl;
 	
 	cout<<"Obiekt typu prostokat:"<<endl;
-	pro.print();
+	rectangle1.print();
 	cout<<endl;
 	
-	cout<<"Zmienna typu int:"<<test<<endl;
+	cout<<"Zmienna typu int:"<<value<<endl;
 	cout<<endl;
-	
-	
-	cout<<"2. Odwolywanie sie do metody przez wskaznik, dzialanie metody set:"<<endl;
+}
+
+void setRMethodByPointerAndPrint() {
+
+	cout<<"Odwolywanie sie do metody przez wskaznik, dzialanie metody set:"<<endl;
 	cout<<endl;
 	
 	cout<<"Przed zmiana: "<<endl;
-	printUniversal(*kol);
-	kol->setR(123);
+	printUniversal(*circle1);
+	circle1->setR(value);
 	
-	cout<<"Po wpisaniu do r wartosci: "<<test<<endl;
-	printUniversal(*kol);
+	cout<<"Po wpisaniu do r wartosci: "<<value<<endl;
+	printUniversal(*circle1);
+}
+
+void polymorphismExampleOfTable() {
 	
-	
-	cout<<"3. Polimorfizm na przyk³adzie tablicy trojwymiarowej, w jednej tablicy mamy kola i prostokaty, oraz prezentacja metody printUniversal:"<<endl;
+	cout<<"Polimorfizm na przykladzie tablicy trojwymiarowej, w jednej tablicy mamy kola i prostokaty, oraz prezentacja metody printUniversal:"<<endl;
 	cout<<endl;
 	figure **** figures = new figure***[2];
 	
@@ -104,57 +108,80 @@ int main(int argc, char *argv[]) {
 	
 	cout<<"end"<<endl;
 	cout<<endl;
-	
-	
-	cout<<"4. Demonstracja polimorfizmu na przykladzie metody printTwoFigure rozne typy:"<<endl;
+}
+
+void polymorphismExampleOfPrintTwoFigure() {
+
+	cout<<"Demonstracja polimorfizmu na przykladzie metody printTwoFigure rozne typy:"<<endl;
 	cout<<endl;
-	printTwoFigure("", *kol, "", pro);
+	printTwoFigure("", *circle1, "", rectangle1);
 	
 	cout<<"Te same typy:"<<endl;
 	cout<<endl;
-	printTwoFigure("", *(new rectangle()), "", pro);
-	
-	
-	cout<<"5. Prezentacja generycznej metody: copyUniversal, kopia dowolnego obiektu:"<<endl;
-	cout<<endl;
-	rectangle kopiaPro = copyUniversal(pro);
-	printTwoFigure("oryginal", pro, "kopia", kopiaPro);
-	
-	cout<<"Po zmianie oryginalu: "<<endl;
-	cout<<endl;
-	pro.setA(33);
-	printTwoFigure("oryginal", pro, "kopia", kopiaPro);
-	
-	cout<<"Po zmianie kopi: "<<endl;
-	cout<<endl;
-	kopiaPro.setB(66);
-	printTwoFigure("oryginal", pro, "kopia", kopiaPro);
-	cout<<endl;
-	
-	
-	cout<<"6. Prezentacja polimorfizmu na przyk³adzie metod: setColorAndPrintUniversal, oraz calculateFieldUniversal"<<endl;
+	printTwoFigure("", *(new rectangle()), "", rectangle1);
+}
+
+void polymorphismExampleOfCalculateFieldUniversal() {
+
+	cout<<"Prezentacja polimorfizmu na przyk³adzie metod: setColorAndPrintUniversal, oraz calculateFieldUniversal"<<endl;
 	cout<<endl;
 	
 	cout<<"Przed uzyciem metody uniwersalnySetKolorAndPrint: "<<endl;
 	cout<<endl;
-	printUniversal(*kol);
+	printUniversal(*circle1);
 	
 	cout<<"Po uzyciu metody uniwersalnySetKolorAndPrint: "<<endl;
 	cout<<endl;
-	setColorAndPrintUniversal(*kol,"Brazowe");
+	setColorAndPrintUniversal(*circle1, "Brazowe");
 	cout<<endl;
 	
 	cout<<"Wartosc zwracana przez metode uniwersalnyGetPole, dla obiektu z poprzedniego przykladu: "<<endl;
-	cout<<calculateFieldUniversal(*kol)<<endl;
+	cout<<calculateFieldUniversal(*circle1)<<endl;
 	cout<<endl;
 	
 	cout<<"Obiekt typu prostokat, dla ktorego bedzie wywolywana metoda calculateFieldUniversal: "<<endl;
-	printUniversal(pro);
+	printUniversal(rectangle1);
 	cout<<endl;
 	
 	cout<<"Wyswietlenie wartosci zwracanej przez metode calculateFieldUniversal: "<<endl;
-	cout<<calculateFieldUniversal(pro)<<endl;
+	cout<<calculateFieldUniversal(rectangle1)<<endl;
 	cout<<endl;
+}
+
+void testGenericMethodCopyUniversal() {
+
+	cout<<"Prezentacja generycznej metody: copyUniversal, kopia dowolnego obiektu:"<<endl;
+	cout<<endl;
+	rectangle rectangle1Copy = copyUniversal(rectangle1);
+	printTwoFigure("oryginal", rectangle1, "kopia", rectangle1Copy);
+	
+	cout<<"Po zmianie oryginalu: "<<endl;
+	cout<<endl;
+	rectangle1.setA(value);
+	printTwoFigure("oryginal", rectangle1, "kopia", rectangle1Copy);
+	
+	cout<<"Po zmianie kopi: "<<endl;
+	cout<<endl;
+	rectangle1Copy.setB(value*2);
+	printTwoFigure("oryginal", rectangle1, "kopia", rectangle1Copy);
+	cout<<endl;
+	
+}
+
+int main(int argc, char *argv[]) {
+
+	cout<<"1. ";
+	usedVariablesPrint();
+	cout<<"2. ";
+	setRMethodByPointerAndPrint();
+	cout<<"3. ";
+	polymorphismExampleOfTable();
+	cout<<"4. ";
+	polymorphismExampleOfPrintTwoFigure();
+	cout<<"5. ";
+	polymorphismExampleOfCalculateFieldUniversal();
+	cout<<"6. ";
+	testGenericMethodCopyUniversal();
 
 	_getch();
 	return 0;
